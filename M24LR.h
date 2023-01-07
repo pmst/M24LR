@@ -13,25 +13,37 @@
 #endif
 
 #include "Arduino.h"
-//#include <Wire.h>
+
+#define PASSWORD_LENGTH 4
+
 class M24LR
 {
 public:
-  M24LR(int M24LRaddress);
-  byte read_byte(unsigned int eeaddress );
-  void write_byte(unsigned int eeaddress, byte data);
-  byte write_page(unsigned int eeaddresspage, byte* data, byte length);
-  byte write_cont(unsigned int eeaddresspage, byte* data, byte length);
+  M24LR(uint8_t M24LRaddress);
+  uint8_t read_byte(uint16_t eeaddress );
+  int16_t read(uint16_t eeaddresse, void* buf, uint16_t len);
+
+  void write_byte(uint16_t eeaddress, uint8_t data);
+  int16_t write(uint16_t eeaddress, void* buf, uint16_t len);
+
+  uint32_t read_lock_bits();
+  uint64_t read_uuid();
+
+  uint8_t read_sectory_security_status(uint8_t sector);
+  void write_sectory_security_status(uint8_t sector, uint8_t mask);
+
+  void present_password(uint8_t *password);
+  void write_password(uint8_t *password);
 
   void EH_enable();
   void EH_disable();
-  void EH_config(byte eh_config); // bXXXXX[EH][mode1][mode2] EH set to 1 for EH enabled on power up
+  void EH_config(uint8_t eh_config); 
   boolean FIELD_PRESENT();
-//  byte NDEF_text[];
-  byte NDEF(String ndef_msg);
+
 private:
-  int _deviceaddress;
-  //string NDEF_text[]={0xE1, 0x40, 0x40, 0x05, 0x03, 0x00, 0xD1, 0x01, 0x00, 0x54, 0x02, 0x65, 0x6E};
-//  void write_system_byte(unsigned int eeaddress, byte data);
+  uint8_t _deviceaddress;
+
+  
+
 };
 #endif
