@@ -8,11 +8,11 @@
 
 #if defined(__AVR_ATtiny45__) || defined(__AVR_ATmega2560__)
 #include <TinyWireM.h>
-#elif defined(__AVR_ATmega328P__)
+#else
 #include <Wire.h>
 #endif
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 #define PASSWORD_LENGTH 4
 

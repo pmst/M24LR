@@ -23,7 +23,7 @@ static uint8_t i2cread(void){
 return TinyWireM.receive();
 }
 
-#elif defined(__AVR_ATmega328P__)
+#else
 #include <Wire.h>
 #define lib Wire
 #define _i2c Wire
@@ -34,7 +34,7 @@ static uint8_t i2cread(void){
 return  Wire.read();
 }
 #endif
-#include "Arduino.h"
+
 #include "M24LR.h"
 
 
